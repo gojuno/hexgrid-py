@@ -137,11 +137,11 @@ class Grid(_Grid):
 
     def hex_to_code(self, hex):
         # type: (Hex) -> int
-        return self.morton.pack(hex.q, hex.r)
+        return self.morton.spack(hex.q, hex.r)
 
     def hex_from_code(self, code):
         # type: (int) -> Hex
-        return Hex(*self.morton.unpack(code))
+        return Hex(*self.morton.sunpack(code))
 
     def hex_at(self, point):
         # type: (Point) -> Hex
