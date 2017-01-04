@@ -71,6 +71,7 @@ def point_in_geometry(point, geometry):
 
     return contains
 
+
 class Hex(namedtuple('Hex', ['q', 'r'])):
 
     @property
@@ -96,20 +97,25 @@ class FractionalHex(Hex):
 
 _Orientation = namedtuple(
     'Orientation',
-    ['f', 'b', 'startAngle', 'sinuses', 'cosinuses'])
+    ['f', 'b', 'start_angle', 'sinuses', 'cosinuses'])
 
 
 class Orientation(_Orientation):
-    def __new__(cls, f, b, start_angle):
+
+    def __new__(cls, f, b, start_angle, sinuses=None, cosinuses=None):
         assert type(f) is list and len(f) == 4
         assert type(b) is list and len(b) == 4
+        sinuses = sinuses or []
+        cosinuses = cosinuses or []
         # prehash angles
-        sinuses = []
-        cosinuses = []
-        for i in range(6):
-            angle = 2.0 * math.pi * (i + start_angle)/6.0
-            sinuses.append(math.sin(angle))
-            cosinuses.append(math.cos(angle))
+        if not sinuses:
+            for i in range(6):
+                angle = 2.0 * math.pi * (i + start_angle)/6.0
+                sinuses.append(math.sin(angle))
+        if not cosinuses:
+            for i in range(6):
+                angle = 2.0 * math.pi * (i + start_angle)/6.0
+                cosinuses.append(math.cos(angle))
         return super(Orientation, cls).__new__(cls, f, b, start_angle, sinuses, cosinuses)
 
 

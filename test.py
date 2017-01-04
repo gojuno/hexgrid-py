@@ -1,5 +1,6 @@
 import unittest
 import logging
+import pickle
 
 from hexgrid import (
     Point, Hex, Grid, OrientationFlat, OrientationPointy,
@@ -28,6 +29,9 @@ class TestHexgrid(unittest.TestCase):
         self.assertHexEqual(Hex(22, -11), grid.hex_at(Point(666, 13)))
         self.assertHexEqual(Hex(-1, -39), grid.hex_at(Point(-13, -666)))
         self.assertHexEqual(Hex(-22, 9), grid.hex_at(Point(-666, -13)))
+
+        grid = Grid(OrientationFlat, Point(0, 0), Point(5, 5))
+        self.assertHexEqual(Hex(0, 37), grid.hex_at(Point(0, 320)))
 
     def test_coordinates_flat(self):
         grid = Grid(OrientationFlat, Point(10, 20), Point(20, 10))
@@ -184,3 +188,7 @@ class TestHexgrid(unittest.TestCase):
         for hex, expected_code in zip(hexes, expected_codes):
             code = grid.hex_to_code(hex)
             self.assertEqual(code, expected_code)
+
+    def test_pickle(self):
+        grid = Grid(OrientationFlat, Point(0, 0), Point(10, 10))
+        self.assertEqual(grid, pickle.loads(pickle.dumps(grid)))

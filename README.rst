@@ -21,7 +21,7 @@ Example
     code = grid.hex_to_code(hex)
     restored_hex = grid.hex_from_code(code)
     neighbors = grid.hex_neighbors(hex, 2)
-    points := [
+    points = [
         hexgrid.Point(0, 0), hexgrid.Point(0, 10),
         hexgrid.Point(10, 10), hexgrid.Point(10, 0)
     ]
