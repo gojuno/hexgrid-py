@@ -13,7 +13,7 @@ def read(fname):
 
 setup(
     name='hexgrid-py',
-    version='1.2',
+    version='1.3',
     author='Andrew Kirilenko',
     author_email='iced@gojuno.com',
     maintainer='Alexander Verbitsky',
@@ -25,7 +25,7 @@ setup(
     py_modules=['hexgrid'],
     test_suite='test',
     install_requires=(
-        'morton-py==1.2',
+        'morton-py>=1.3',
     ),
     extras_require={
         'shapely': (
