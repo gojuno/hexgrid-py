@@ -27,3 +27,7 @@ Example
     ]
     region = grid.make_region(points)
     hexes_in_region = region.hexes
+
+Setup
+-------
+pip install hexgrid-py
